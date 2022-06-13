@@ -1,0 +1,11 @@
+payload:
+  - '+.emclient.com'
+  - '+.githubusercontent.com'
+  - '+.adguard.com'
+  - '+.yandex.com'
+  - '+.google.com'
+  - '+.gmail.com'
+  - '+.gstatic.com'
+  - '+.gvt1.com'
+  - '+.pki.goog'
+  - '+.recaptcha.net'
