@@ -1,0 +1,52 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+external-controller: 127.0.0.1:50612
+secret: 1a655653-a6e4-4a29-9901-29249541506f
+
+proxies:
+  - name: PROXY
+    type: vmess
+    server: 
+    port: 443
+    uuid: 
+    alterId: 0
+    cipher: auto
+    tls: true
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+     path: /
+     headers:
+      Host: 
+    max-early-data: 2048
+    early-data-headler-name: Sec-WebSocket-Protocol
+
+rule-providers:
+  adblock:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+  reject:
+    type: http
+    behavior: domain
+    url: "https://github.com/maling-one/clash-rules/releases/download/v0.0.1/reject.txt"
+    path: ./ruleset/myreject.yaml
+    interval: 86400
+  proxy:
+    type: http
+    behavior: domain
+    url: "https://github.com/maling-one/clash-rules/releases/download/v0.0.1/proxy.txt"
+    path: ./ruleset/proxy.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,adblock,REJECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,proxy,PROXY
+# Customer ==============================================
+  - DOMAIN-SUFFIX,dr-ime.baidu.com,REJECT
+# OTHER ==============================================
+  - MATCH,DIRECT
